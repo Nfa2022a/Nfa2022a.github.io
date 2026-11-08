@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UpScale Company | Roblox Game Growth & Acquisition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0d0d0d;
+      --card-bg: #161618;
+      --card-border: #26262a;
+      --accent: #ffb800;
+      --accent-hover: #e0a200;
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Glow Background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 184, 0, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.5rem;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .btn-talk {
+      background-color: var(--accent);
+      color: #000;
+      padding: 0.5rem 1.2rem;
+      border-radius: 99px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-talk:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 4rem 0 3rem 0;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-card h2 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .stat-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* Section Headers */
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+    }
+
+    /* Portfolio Section */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portfolio-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .portfolio-img {
+      width: 100%;
+      height: 180px;
+      background-color: #222;
+      object-fit: cover;
+    }
+
+    .portfolio-info {
+      padding: 1.25rem;
+    }
+
+    .portfolio-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-stats {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 1rem;
+    }
+
+    .portfolio-btn-container {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    .btn-secondary {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 0.75rem 2rem;
+      border-radius: 99px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      background: #202024;
+    }
+
+    /* About / Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-weight: 900;
+      color: #000;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Contact Section */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.8rem; }
+    }
+
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-detail {
+      margin-top: 1.5rem;
+    }
+
+    .contact-detail label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .contact-detail p {
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      background: #0d0d0d;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      outline: none;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+  </style>
+<style>
+/* Styles for the starter page. They only apply to its own classes. */
+.hello-page {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: #f5f2ed;
+  color: #1b1817;
+}
+
+.hello-card {
+  max-width: 28rem;
+  margin: 1.5rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+.hello-card h1 {
+  margin-top: 0;
+  color: #c2560c;
+}
+
+.hello-card button {
+  padding: 0.6rem 1.2rem;
+  border: 0;
+  border-radius: 8px;
+  background: #fe9615;
+  color: #1b1817;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <nav>
+      <div class="logo">🚀 UpScale</div>
+      <ul class="nav-links">
+        <li><a href="#games">GAMES</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#contact">PARTNERSHIP</a></li>
+        <li><a href="#contact" class="btn-talk">Lets Talk</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="container hero">
+    <h1>UpScale Company</h1>
+    <p>We specialize in scaling & growing Roblox games</p>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h2>30+</h2>
+        <p>Games Managed / Scaled</p>
+      </div>
+      <div class="stat-card">
+        <h2>850M+</h2>
+        <p>Total Play Sessions</p>
+      </div>
+      <div class="stat-card">
+        <h2>25K+</h2>
+        <p>Peak Concurrent Players</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section id="games" class="container">
+    <h2 class="section-title">Portfolio</h2>
+    <p class="section-subtitle">Featured games scaled through our partnership program</p>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <img src="https://via.placeholder.com/400x225/1f1f23/ffffff?text=Roblox+Game+1" alt="Game Thumbnail" class="portfolio-img">
+        <div class="portfolio-info">
+          <h3>Paint to Get Rich</h3>
+          <div class="portfolio-stats">
+            <span>👤 5.7K CCU</span>
+            <span>👁️ 82.1M Visits</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="https://via.placeholder.com/400x225/1f1f23/ffffff?text=Roblox+Game+2" alt="Game Thumbnail" class="portfolio-img">
+        <div class="portfolio-info">
+          <h3>Punch Walls To Escape</h3>
+          <div class="portfolio-stats">
+            <span>👤 4.6K CCU</span>
+            <span>👁️ 5.1M Visits</span>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="https://via.placeholder.com/400x225/1f1f23/ffffff?text=Roblox+Game+3" alt="Game Thumbnail" class="portfolio-img">
+        <div class="portfolio-info">
+          <h3>Hide In Drawings</h3>
+          <div class="portfolio-stats">
+            <span>👤 3.7K CCU</span>
+            <span>👁️ 4.4M Visits</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-btn-container">
+      <a href="#contact" class="btn-secondary">View all games →</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="container">
+    <h2 class="section-title">About Us</h2>
+    <p class="section-subtitle">Top Roblox Game Acquisition, Production, and Live Operations.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>Short-Term Partnerships</h3>
+        <p>Revamping thumbnails, scaling CCU, and implementing temporary revenue splits with zero permanent ownership loss.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Game Production & LiveOps</h3>
+        <p>Building, launching, and executing weekly content updates to maximize retention and monetization.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💼</div>
+        <h3>Game Acquisition</h3>
+        <p>Outright acquiring promising Roblox titles with transparent valuations and fair developer payout deals.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🤝</div>
+        <h3>Trusted Partner</h3>
+        <p>Working directly with independent developers under clear, transparent contracts for mutual success.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p style="color: var(--text-muted);">Want to connect? Reach out via email or Discord.</p>
+        
+        <div class="contact-detail">
+          <label>Email</label>
+          <p>business@upscale.gg</p>
+        </div>
+        <div class="contact-detail">
+          <label>Discord</label>
+          <p>Razor / Nightmare-Tiger</p>
+        </div>
+      </div>
+
+      <form class="contact-form" action="#" method="POST">
+        <div class="form-group">
+          <input type="text" placeholder="Discord Username" required>
+        </div>
+        <div class="form-group">
+          <textarea rows="4" placeholder="Tell us about your project or game link..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 UpScale Company. All rights reserved.</p>
+  </footer>
+
+<script>
+// Script for the starter page. It does nothing if the button isn't there.
+const button = document.getElementById('greet');
+const message = document.getElementById('message');
+let clicks = 0;
+
+if (button && message) {
+  button.addEventListener('click', () => {
+    clicks += 1;
+    message.textContent = `Hello! You clicked ${clicks} time${clicks === 1 ? '' : 's'}.`;
+    console.log('Button clicked', clicks);
+  });
+}
+
+</script>
+</body>
+</html>
