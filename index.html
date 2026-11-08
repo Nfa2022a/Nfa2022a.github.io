@@ -60,21 +60,25 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 2rem;
+      padding: 1rem 2rem;
     }
 
     .logo {
-      font-weight: 900;
-      font-size: 1.5rem;
-      letter-spacing: -0.5px;
       display: flex;
       align-items: center;
-      gap: 8px;
       cursor: pointer;
     }
 
-    .logo span {
-      color: var(--accent);
+    .logo-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+
+    .logo:hover .logo-img {
+      transform: scale(1.03);
     }
 
     .nav-links {
@@ -282,7 +286,7 @@
       transform: translateY(-2px);
     }
 
-    /* Search & Filter Bar for All Games page */
+    /* Search & Filter Bar */
     .filter-bar {
       display: flex;
       gap: 1rem;
@@ -436,7 +440,9 @@
   <!-- Navbar -->
   <header>
     <nav>
-      <div class="logo" onclick="switchView('home')">🚀 UpScale</div>
+      <div class="logo" onclick="switchView('home')">
+        <img src="https://media.discordapp.net/attachments/1560152390118805525/1560152499413975050/3cf76a8ff1adad36550aac2ccd56969a.png?ex=6af1f97e&is=6af0a7fe&hm=93cbb3fceed1ec706e9a507f1e25dbac033c1415839675ef23de757edea072b6&=&format=webp&quality=lossless" alt="UpScale Logo" class="logo-img">
+      </div>
       <ul class="nav-links">
         <li><a onclick="switchView('home')">HOME</a></li>
         <li><a onclick="switchView('games-list')">GAMES</a></li>
